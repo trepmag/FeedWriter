@@ -727,7 +727,6 @@ abstract class Feed
         if (is_array($attributes) && count($attributes) > 0) {
             foreach ($attributes as $key => $value) {
                 $value = self::filterInvalidXMLChars($value);
-                $value = htmlspecialchars($value);
                 $attrText .= " $key=\"$value\"";
             }
         }
@@ -746,7 +745,7 @@ abstract class Feed
             }
         } else {
             $tagContent = self::filterInvalidXMLChars($tagContent);
-            $nodeText .= (in_array($tagName, $this->CDATAEncoding)) ? $this->sanitizeCDATA($tagContent) : htmlspecialchars($tagContent);
+            $nodeText .= (in_array($tagName, $this->CDATAEncoding)) ? $this->sanitizeCDATA($tagContent) : $tagContent;
         }
 
         $nodeText .= (in_array($tagName, $this->CDATAEncoding)) ? ']]>' : '';
